@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juribeir <juribeir@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 14:48:56 by juribeir          #+#    #+#             */
+/*   Updated: 2025/02/05 14:48:56 by juribeir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -15,7 +27,6 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	bytes_read = 1;
-	/* Lê do arquivo enquanto não encontrar um '\n' e enquanto houver dados */
 	while (!ft_strchr(stash, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
