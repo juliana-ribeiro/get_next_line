@@ -6,7 +6,7 @@
 /*   By: juribeir <juribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:48:56 by juribeir          #+#    #+#             */
-/*   Updated: 2025/02/05 14:48:56 by juribeir         ###   ########.fr       */
+/*   Updated: 2025/02/06 05:00:29 by juribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*get_next_line(int fd)
+char	*read_and_store(int fd, char *stash)
 {
-	static char	*stash;
-	char		*line;
-	char		*buf;
-	int			bytes_read;
+	char	*buf;
+	int		bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
@@ -39,6 +35,17 @@ char	*get_next_line(int fd)
 		stash = ft_strjoin(stash, buf);
 	}
 	free(buf);
+	return (stash);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stash;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stash = read_and_store(fd, stash);
 	if (!stash || stash[0] == '\0')
 	{
 		free(stash);
