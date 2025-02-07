@@ -6,7 +6,7 @@
 /*   By: juribeir <juribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:47:21 by juribeir          #+#    #+#             */
-/*   Updated: 2025/02/05 14:47:21 by juribeir         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:58:58 by juribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,9 @@ char	*extract_line_from_stash(char *stash)
 	line = malloc(i + 1);
 	if (!line)
 		return (NULL);
-	i = 0;
-	while (stash[i] && stash[i] != '\n')
-	{
-		line[i] = stash[i];
-		i++;
-	}
-	if (stash[i] == '\n')
-	{
-		line[i] = stash[i];
-		i++;
-	}
 	line[i] = '\0';
+	while (i--)
+		line[i] = stash[i];
 	return (line);
 }
 
@@ -103,7 +94,6 @@ char	*clean_stash(char *stash)
 	size_t	i;
 	size_t	j;
 	char	*new_stash;
-	size_t	stash_len;
 
 	i = 0;
 	j = 0;
@@ -111,14 +101,9 @@ char	*clean_stash(char *stash)
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (!stash[i])
-	{
-		free(stash);
-		return (NULL);
-	}
-	i++;
-	stash_len = ft_strlen(stash);
-	new_stash = malloc(stash_len - i + 1);
+	if (!stash[i++])
+		return (free(stash), NULL);
+	new_stash = malloc((ft_strlen(stash) - i) + 1);
 	if (!new_stash)
 		return (NULL);
 	while (stash[i])

@@ -6,7 +6,7 @@
 /*   By: juribeir <juribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:48:56 by juribeir          #+#    #+#             */
-/*   Updated: 2025/02/06 05:00:29 by juribeir         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:03:44 by juribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*read_and_store(int fd, char *stash)
+static char	*read_and_store(int fd, char *stash)
 {
 	char	*buf;
 	int		bytes_read;
